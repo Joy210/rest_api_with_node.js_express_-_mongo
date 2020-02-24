@@ -6,19 +6,20 @@ router.get("/", (req, res) => {
   res.send("We are on posts route");
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   //   console.log(req.body);
+
   const post = new Post({
     title: req.body.title,
     description: req.body.description
   });
 
-  post
-    .save()
-    .then(data => res.json(data))
-    .catch(err => {
-      res.json({ message: err });
-    });
+  try {
+    const savedPost = await post.save();
+    res.json(savedPost);
+  } catch (error) {
+    res.json({ message: error });
+  }
 });
 
 module.exports = router;
