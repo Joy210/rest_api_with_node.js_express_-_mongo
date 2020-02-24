@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
 
+// GET ALL POSTS
 router.get("/", async (req, res) => {
   //   res.send("We are on posts route");
 
@@ -13,6 +14,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// GET SPECIFIC POST
+router.get("/:postId", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+    res.json(post);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+// SAVE POST
 router.post("/", async (req, res) => {
   //   console.log(req.body);
 
