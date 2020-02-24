@@ -2,8 +2,15 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
 
-router.get("/", (req, res) => {
-  res.send("We are on posts route");
+router.get("/", async (req, res) => {
+  //   res.send("We are on posts route");
+
+  try {
+    const posts = await Post.find();
+    res.json(posts);
+  } catch (error) {
+    res.json({ message: error });
+  }
 });
 
 router.post("/", async (req, res) => {
