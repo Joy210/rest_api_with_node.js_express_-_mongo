@@ -20,16 +20,3 @@ const PostSchema = Schema({
 });
 
 module.exports = mongoose.model("Posts", PostSchema);
-
-// const Schema = mongoose.Schema;
-// const ObjectId = Schema.ObjectId;
-
-// var blogSchema = new Schema({
-//   title: String,
-//   body: String
-// });
-
-// var Blog = mongoose.model("Blog", blogSchema);
-// var post = new Blog({ title: "Blog Title", body: "Blog Description" });
-// post.save();
-// console.log(post);
