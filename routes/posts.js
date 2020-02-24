@@ -24,6 +24,16 @@ router.get("/:postId", async (req, res) => {
   }
 });
 
+// DELETE SPECIFIC POST
+router.delete("/:postId", async (req, res) => {
+  try {
+    const deletePost = await Post.remove({ _id: req.params.postId });
+    res.json(deletePost);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
 // SAVE POST
 router.post("/", async (req, res) => {
   //   console.log(req.body);
@@ -36,6 +46,27 @@ router.post("/", async (req, res) => {
   try {
     const savedPost = await post.save();
     res.json(savedPost);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+// SAVE POST
+router.patch("/:postId", async (req, res) => {
+  //   console.log(req.body);
+
+  try {
+    const updatePost = await Post.updateOne(
+      { _id: req.params.postId },
+      {
+        $set: {
+          title: req.body.title,
+          description: req.body.description
+        }
+      }
+    );
+
+    res.json(updatePost);
   } catch (error) {
     res.json({ message: error });
   }
